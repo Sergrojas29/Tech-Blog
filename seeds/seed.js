@@ -1,5 +1,5 @@
 const sequelize = require('../config/connection');
-
+const bcrypt = require('bcrypt')
 const seedUser = require('./userData');
 const seedPost = require('./postData');
 

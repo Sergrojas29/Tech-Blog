@@ -1,7 +1,8 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
+const bcrypt = require('bcrypt')
 
-class User extends Model {}
+class User extends Model { }
 User.init(
   {
     id: {
@@ -22,22 +23,49 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // cat_id: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: true,
-    //   references: {
-    //     model: 'cat',
-    //     key: 'id',
-    //   },
-    // },
-  },
-    {
-      sequelize,
-      timestamps: false,
-      freezeTableName: true,
-      underscored: true,
-      modelName: 'user',
+  },  
+  {
+    hooks: {
+      beforeBulkCreate: async (user) => {
+        try {
+          // user.password = await bcrypt.hash(user.password, 10);
+          console.log(user.password);
+        } catch (err) {
+          console.log(err);
+        }
+      },
+      // beforeCreate: async (user) => {
+      //   try {
+      //     user.password = await bcrypt.hash(user.password, 10);
+      //   } catch (err) {
+      //     console.log(err);
+      //   }
+      // },
+      // beforeUpdate: async (user) => {
+      //   try {
+      //     user.password = await bcrypt.hash(user.password, 10);
+      //   } catch (err) {
+      //     console.log(err);
+      //   }
+      // },
+    },
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'user',
   },
 );
+
+// User.beforeCreate(async (user, options) => {
+//   const hashedPassword = bcrypt.hashSync(user.password , 10);
+//   user.password = hashedPassword;
+// });
+
+// User.beforeUpdate((user) => {
+//   const hashedPassword = bcrypt.hashSync(user.password , 10);
+//   user.password = hashedPassword;
+// });
+
 
 module.exports = User;
