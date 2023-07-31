@@ -1,0 +1,36 @@
+{
+  "name": "tech-blog",
+  "version": "1.0.0",
+  "description": "blog style website use handlebars and sql",
+  "main": "server.js",
+  "scripts": {
+    "devStart": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node seeds/seed.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sergrojas29/Tech-Blog.git"
+  },
+  "author": "Sergio Rojas-Aguilar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sergrojas29/Tech-Blog/issues"
+  },
+  "homepage": "https://github.com/Sergrojas29/Tech-Blog#readme",
+  "dependencies": {
+    "sequelize": "^6.3.5",
+    "mysql2": "^2.2.5",
+    "uuid": "^9.0.0",
+    "express": "^4.17.1",
+    "dotenv": "^8.2.0",
+    "bcrypt": "^5.0.0",
+    "connect-session-sequelize": "^7.0.4",
+    "express-handlebars": "^5.2.0",
+    "express-session": "^1.17.1",
+    "handlebars": "^4.7.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
