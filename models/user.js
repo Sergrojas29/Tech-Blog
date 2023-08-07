@@ -2,7 +2,11 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection.js');
 const bcrypt = require('bcrypt')
 
-class User extends Model { }
+class User extends Model {
+  async checkPassword(userPassword) {
+    return await bcrypt.compare(userPassword, this.password)
+  }
+ }
 User.init(
   {
     id: {
@@ -26,21 +30,18 @@ User.init(
   },  
   {
     hooks: {
-      beforeBulkCreate: async (user) => {
+      beforeBulkCreate: (user) => {
+        user.forEach( (user)=>{
+          user.password = bcrypt.hashSync(user.password, 10)
+        })
+      },
+      beforeCreate: async (user) => {
         try {
-          // user.password = await bcrypt.hash(user.password, 10);
-          console.log(user.password);
+          user.password = await bcrypt.hash(user.password, 10);
         } catch (err) {
           console.log(err);
         }
       },
-      // beforeCreate: async (user) => {
-      //   try {
-      //     user.password = await bcrypt.hash(user.password, 10);
-      //   } catch (err) {
-      //     console.log(err);
-      //   }
-      // },
       // beforeUpdate: async (user) => {
       //   try {
       //     user.password = await bcrypt.hash(user.password, 10);
@@ -62,10 +63,11 @@ User.init(
 //   user.password = hashedPassword;
 // });
 
-// User.beforeUpdate((user) => {
-//   const hashedPassword = bcrypt.hashSync(user.password , 10);
-//   user.password = hashedPassword;
-// });
+User.beforeUpdate( async (user) => {
+  console. log("\x1b[33m%s\x1b[0m", "Your hitting the update"); 
+  const hashedPassword = await bcrypt.hash(user.password , 10);
+  user.password = hashedPassword;
+});
 
 
 module.exports = User;

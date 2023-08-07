@@ -48,25 +48,28 @@ router.post('/', async (req, res) => {
 })
 
 router.post( '/login', async (req, res) => {
-    const existingUser = await User.findOne(
-        {
-            where: 
-            {
-                email: req.body.email
-            }
-        }
-    )
 
-    if(!existingUser) {
-        res.status(400).json("no user was found")
-    }
+
+    res.status(200).json("hello")
+    // const existingUser = await User.findOne(
+    //     {
+    //         where: 
+    //         {
+    //             email: req.body.email
+    //         }
+    //     }
+    // )
+
+    // if(!existingUser) {
+    //     res.status(400).json("no user was found")
+    // }
     
-    const vaildPassword = await bcrypt.compare( req.body.password , existingUser.password);
+    // const vaildPassword = await bcrypt.compare( req.body.password , existingUser.password);
     
-    if(!vaildPassword){
-        res.status(400).json("not correct password")
-    }
-    res.status(200).json("there is user") 
+    // if(!vaildPassword){
+    //     res.status(400).json("not correct password")
+    // }
+    // res.status(200).json("there is user") 
 })
 
 
