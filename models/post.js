@@ -15,11 +15,11 @@ Post.init(
     },
     content:{
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     author: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       references: {
         model: 'user',
         key: 'id',

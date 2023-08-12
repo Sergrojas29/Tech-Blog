@@ -1,108 +1,66 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
 
-const { User } = require('../../models')
+const { User, Post } = require('../../models')
 
 
-router.get('/', async (req, res) => {
-    try {
-        const data = await User.findAll()
-        res.status(200).json(data)
+// /api/user/
 
-    } catch (err) {
-        console.log(err);
-        res.status(400).json(err.message)
-    }
-})
-
-
-router.get('/:id', async (req, res) => {
-    try {
-        const data = await User.findOne({
-            where: {
-                id: req.params.id
-            }
-        })
-        res.status(200).json(data)
-
-    } catch (err) {
-        console.log(err);
-        res.status(400).json(err.message)
-    }
-})
 
 router.post('/', async (req, res) => {
     try {
-        // const newUser = req.body
+        if (req.body.first_name && req.body.last_name && req.body.password && req.body.email) {
+            const dbUserData = await User.create(req.body);
+            console.log(dbUserData)
+            req.session.loggedIn = true;
+            res.status(200).redirect('/')
+        } else {
 
-        // newUser.password = await bcrypt.hash(req.body.password, 10);
+        }
 
-        const data = await User.create(req.body)
-
-        res.status(200).send(data)
-
-    } catch (error) {
-        console.log(error);
-
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
     }
-})
-
-router.post( '/login', async (req, res) => {
+});
 
 
-    res.status(200).json("hello")
-    // const existingUser = await User.findOne(
-    //     {
-    //         where: 
-    //         {
-    //             email: req.body.email
-    //         }
-    //     }
-    // )
 
-    // if(!existingUser) {
-    //     res.status(400).json("no user was found")
-    // }
-    
-    // const vaildPassword = await bcrypt.compare( req.body.password , existingUser.password);
-    
-    // if(!vaildPassword){
-    //     res.status(400).json("not correct password")
-    // }
-    // res.status(200).json("there is user") 
-})
-
-
-router.put('/:id', async (req, res) => {
+// Login
+router.post('/login', async (req, res) => {
     try {
-        const data = await User.update(req.body, {
+        const dbUserData = await User.findOne({
             where: {
-                id: req.params.id
-            }
-        })
+                email: req.body.email,
+            },
+        });
+        const user = dbUserData.get({plain:true})
 
-        res.status(200).json(data)
-    } catch (error) {
-        res.status(400).json(error)
+        const validPassword = dbUserData.checkPassword(req.body.password);
+
+        if (!validPassword || !dbUserData) {
+            // If password is invalid, respond with an error
+            res.status(400).json({ message: 'Incorrect email or password. Please try again!' });
+            return
+        } else {
+
+            // At this point, both email and password are valid
+            req.session.loggedIn = true;
+            req.session.username = user.username;
+            req.session.id= user.id
+            console.log(req.session);
+            console.log(user);
+
+            return res.status(200).redirect('/');
+        }
+
+
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json(err);
     }
-})
+});
 
-router.delete('/:username', async (req, res) => {
-    try {
-        const data = await User.destroy(
-            {
-                where: {
-                    username: req.params.username
-                }
-            })
-
-        res.status(200).json(data)
-    } catch (error) {
-        res.status(400).json(error)
-    }
-
-
-})
 
 
 

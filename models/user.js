@@ -30,25 +30,26 @@ User.init(
   },  
   {
     hooks: {
-      beforeBulkCreate: (user) => {
-        user.forEach( (user)=>{
-          user.password = bcrypt.hashSync(user.password, 10)
-        })
-      },
-      beforeCreate: async (user) => {
+      beforeCreate: async (newData) => {
         try {
-          user.password = await bcrypt.hash(user.password, 10);
+          newData.password = await bcrypt.hash(newData.password, 10);
         } catch (err) {
           console.log(err);
         }
       },
-      // beforeUpdate: async (user) => {
-      //   try {
-      //     user.password = await bcrypt.hash(user.password, 10);
-      //   } catch (err) {
-      //     console.log(err);
-      //   }
-      // },
+      beforeBulkCreate: (bulk) => {
+          bulk.forEach((user) => {
+            user.dataValues.password = bcrypt.hashSync(user.dataValues.password, 10)
+          }
+          )
+      },
+      beforeUpdate: async (updatedUserData) => {
+        try {
+          updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        } catch (error) {
+          console.log(error);
+        }
+      },
     },
     sequelize,
     timestamps: false,

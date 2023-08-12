@@ -38,9 +38,15 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const data = await Post.create(req.body)
-
-        res.status(200).send(data)
+        req.session.username = 1
+        author = req.session.username
+        data = {
+            ...req.body,
+            author
+        }
+        console.log(req.body);
+        const newPost = await Post.create(data)
+        res.status(200).send(req.body)
 
     } catch (error) {
         console.log(error);

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tech Blog</title>
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="/style/style.css">
+</head>
+
+<body>
+    <header>
+            {{!-- <a id="logoContainer" href="/">
+                <img src="/assets/catcoin-token-cats-logo.svg" alt="logo" id="logo" href="home">
+            </a> --}}
+
+        <div id="linkContainer">
+            <a class="linkHeader" href="/">Home</a>
+            <a class="linkHeader" href="post">Create Post</a>
+            {{!-- <a class="linkHeader" href="meetourcats">Meet our Cats</a> --}}
+            {{#if loggedIn}}
+            <a class="linkHeader" href="logout" method="GET" style="color: #fe4a49;">logout</a>
+            {{else}}
+            <a class="linkHeader" href="login">Login</a>
+            {{!-- style="background: #238636; color: whitesmoke;" --}}
+            {{/if}}
+        </div>
+    </header>
+
+    {{{ body }}}
+
+    {{!-- <footer>
+        <div id="footerContain">
+            <div id="address">
+                <h8 class="footerTitle">Address</h8>
+                <h9>303 Meowtain rd</h9>
+                <h9>Cater, NJ 01010</h9>
+            </div>
+            <div id="Hours">
+                <h7 class="footerTitle">Open Hours</h7>
+                <h9>Mon-Fri: 9AM - 9PM</h9>
+                <h9>SAT-SUN: 12PM - 10PM</h9>
+            </div>
+        </div>
+
+
+    </footer> --}}
+</body>
+<script src="/js/script.js"></script>
+</html>

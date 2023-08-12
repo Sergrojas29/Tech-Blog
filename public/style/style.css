@@ -1,0 +1,531 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* font-family: founders-heading, sans-serif; */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+:root {
+    --Primary: #f4f4f8;
+    --Seconnday: #e3d8b8;
+    --Accent: #fe4a49;
+    --Base: #2ab7ca;
+    --BaseDark: #218d9b;
+    --Button: #d68571;
+    --submit: #238636;
+
+}
+
+
+header {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: end;
+    height: 100px;
+    /* border: solid 1pt blue; */
+    background-color: var(--Base);
+    position: relative;
+
+    >#logoContainer {
+        display: flex;
+        position: absolute;
+        left: 0;
+        width: 50px;
+        margin-left: 30px;
+        margin-bottom: 10px;
+    }
+
+    >#linkContainer {
+        padding: 15px 0;
+
+        >.linkHeader {
+            border: solid 1pt red;
+            text-transform: uppercase;
+            background: var(--Base);
+            border: none;
+            margin: 10px;
+            padding: 10px;
+            color: white;
+            font-size: var(--LargeScreenText);
+            border-radius: 5px;
+            font-size: 15pt;
+            font-style: none;
+            text-decoration: none;
+        }
+
+        >.btnHeader:hover {
+            background-color: var(--BaseDark);
+        }
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    /* border: solid 2pt red; */
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+.card {
+
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    /* border: solid 1pt red; */
+    background: var(--Seconnday);
+    padding: 20px;
+    border-radius: 5px;
+    margin: 60px 10px;
+
+}
+
+input {
+    width: 300px;
+    font-size: 16pt;
+    border-radius: 5px;
+    border: solid 1pt grey;
+    padding: 5px;
+}
+
+label {
+    width: 300px;
+    font-size: 14pt;
+}
+
+.btnSubmit {
+    padding: 10px;
+    font-size: 14pt;
+    font-weight: 400;
+    border-radius: 5px;
+    margin-top: 20px;
+    border: none;
+    background: #238636;
+    color: #ffffff;
+}
+
+.btnPostSubmit {
+    padding: 10px;
+    width: 100%;
+    height: 60px;
+    font-size: 18pt;
+    font-weight: 400;
+    border-radius: 5px;
+    margin-top: 10px;
+    border: none;
+    background: #238636;
+    color: #ffffff;
+}
+
+
+#catCard {
+    margin: 25px;
+    display: flex;
+    flex-direction: column;
+    background: #f2f2f2;
+    border-radius: 15px;
+    height: 300px;
+    width: 300px;
+    overflow: hidden;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(158, 158, 158, 0.797);
+
+
+    #cardContent {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        height: 100%;
+        text-decoration: none;
+        color: black;
+
+
+        >h1 {
+            /* border: solid 1pt red; */
+            text-align: center;
+            margin: 5px 0;
+            font-size: 20pt;
+        }
+
+        >img {
+            /* border: solid 1pt red; */
+            width: 90%;
+            margin: 0 auto;
+            border-radius: 10px;
+
+        }
+
+        >h2 {
+            font-size: 14pt;
+            text-align: center;
+            margin-top: 5px;
+            color: #525252;
+            /* border: solid 1pt red; */
+        }
+
+        >#Catinfo {
+            /* border: solid 1pt blue; */
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            margin: 0 15px;
+            margin-top: 5px;
+
+            >.cirlceinfo {
+                color: white;
+                font-weight: 800;
+                display: flex;
+                height: 45px;
+                width: 45px;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                background-color: var(--Seconnday);
+                border-radius: 100%;
+
+            }
+        }
+
+    }
+}
+
+
+#catCardProfile {
+    margin: 25px;
+    display: flex;
+    flex-direction: column;
+    background: #f2f2f2;
+    border-radius: 15px;
+    height: 700px;
+    max-width: 600px;
+    overflow: hidden;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(158, 158, 158, 0.797);
+
+
+    #cardContent {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        height: 100%;
+        text-decoration: none;
+        color: black;
+
+
+        >h1 {
+            /* border: solid 1pt red; */
+            text-align: center;
+            margin: 5px 0;
+            font-size: 20pt;
+        }
+
+        >img {
+            /* border: solid 1pt red; */
+            width: 90%;
+            margin: 0 auto;
+            border-radius: 10px;
+
+        }
+
+        >h2 {
+            font-size: 14pt;
+            text-align: center;
+            margin-top: 5px;
+            color: #525252;
+            /* border: solid 1pt red; */
+        }
+
+        >#Catinfo {
+            /* border: solid 1pt blue; */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 15px;
+            margin-top: 5px;
+            border-radius: 15px;
+            overflow: hidden;
+
+        }
+
+        
+    }
+
+}
+
+#size, #age, #affection {
+    color: black;
+    font-weight: 800;
+    display: flex;
+    height: fit-content;
+    /* width: 45px; */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--BaseDark);
+    /* border-radius: 100%; */
+}
+
+#updateAvailabilityForm{
+    display: flex;
+    height: fit-content;
+    /* width: 45px; */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 2px
+}
+
+
+
+#submit-btn {
+    margin: 2px
+}
+
+
+#submit-btn {
+    display: block;
+    width: 200px;
+    height: max-content;
+    font-size: x-large;
+}
+
+/* !   HOME     */
+#homeIntroContain {
+    display: flex;
+    flex-direction: row;
+    max-width: 1200px;
+    justify-self: center;
+    margin: 30px auto;
+    box-shadow: 0 0 15px gray;
+    /* border: solid 1pt red; */
+    background-color: var(--Button);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+#titleContain {
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    width: 100%;
+    font-size: 36pt;
+    align-self: center;
+    /* border: solid 1pt purple; */
+    justify-content: center;
+}
+
+#hometitle {
+    margin-right: 30px;
+    text-align: center;
+}
+
+#imgContain {
+    height: 400px;
+    width: 50%;
+
+    >.catProfile {
+        height: 400px;
+    }
+}
+
+
+
+/*! home Cards */
+.HomeCardContain {
+
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-bottom: 60px;
+    /* width: 100%; */
+}
+
+.homecard {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    /* justify-content: end; */
+    /* align-content: end; */
+    /* align-content: flex-end; */
+    box-shadow: 0 0 15px grey;
+    /* border: solid 1pt red ; */
+    height: 300px;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+#LoginContent {
+    color: white;
+    text-decoration: none;
+    background-color: var(--BaseDark);
+    padding: 10pt;
+    border-radius: 15px;
+    width: 90%;
+    /* height: 60%; */
+    margin: auto;
+    box-shadow: 0 0 15px grey;
+    font-size: 30pt;
+    text-align: center;
+    
+}
+
+#Content {
+    color: white;
+    background-color: var(--BaseDark);
+    padding: 10pt;
+    border-radius: 15px;
+    width: 90%;
+    height: 60%;
+    margin: 0 auto;
+    box-shadow: 0 0 15px grey;
+    font-size: 20pt;
+    
+}
+#Content::placeholder{
+    color: rgb(190, 190, 190);
+}
+.infoContian{
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    align-content: center;
+    align-items: center;
+    font-size:  30px;
+    height: 25%;
+    width: 90%;
+    /* border: solid 1pt red ; */
+    
+}
+
+.cardbtn {
+    padding: 10px 30px;
+    /* height: 50px; */
+    text-decoration: none;
+    border-radius: 15px;
+    color: black;
+}
+
+.cardbtn:hover {
+    color: white;
+    background: #2756ba;
+}
+
+#card_menu,
+#card_cat,
+#card_login {
+    background-image: url(/assets/cat-coffee.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#card_cat {
+    background-image: url(/assets/meetourcats.jpg)
+}
+
+#card_login {
+    background-image: url(/assets/Patorn.jpg);
+
+}
+
+
+
+
+/*!! Menu / aboutus */
+
+#menu {
+    text-align: center;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+
+    >p {
+        margin: 30px 0;
+        align-self: center;
+        max-width: 500px;
+
+    }
+
+    >h2 {
+        text-decoration: underline;
+    }
+
+    >ul {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        align-content: center;
+        align-items: flex-start;
+        align-items: flex-start;
+        justify-content: left;
+        justify-self: left;
+        justify-items: left;
+        padding: 15px;
+        list-style-type: none;
+
+        >li {
+            >strong {
+                color: var(--Button);
+
+            }
+
+            text-decoration: none;
+
+        }
+    }
+}
+
+
+
+
+
+/*!! footer */
+
+footer {
+    background: var(--BaseDark);
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    padding: 30px 0;
+}
+
+#footerContain {
+    display: flex;
+    flex-direction: row;
+    color: #e3e3e3;
+}
+
+#address,
+#Hours {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+
+    >.footerTitle {
+        border-bottom: solid 1pt #e3e3e3;
+        padding-bottom: 5px;
+        margin-bottom: 5px;
+        font-size: 14pt;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    #footerContain {
+        border: solid 1pt red;
+        display: flex;
+        flex-direction: column;
+    }
+}

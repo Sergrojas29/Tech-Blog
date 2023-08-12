@@ -1,0 +1,33 @@
+<body>
+    <section id="homeIntroContain">
+        <div id="titleContain">
+            <h1 id="hometitle">The Tech Blog</h1>
+    </section>
+    <section class="HomeCardContain">
+
+        {{#if loggedIn}}
+        {{#each posts as |post|}}
+        <div class="homecard" id="card_menu">
+            <div class="infoContian">
+                <div class="cardbtn" href="">Title: {{post.title}}</div>
+                <a class="cardbtn" href="/user/{{post.author}}">User: {{post.user.username}}</a>
+            </div>
+            <p id="Content">{{post.content}}</p>
+
+        </div>
+        {{/each}}
+        {{else}}
+        <div class="homecard" id="card_menu">
+            {{!-- <div class="infoContian">
+                <div class="cardbtn" href="">Title: {{post.title}}</div>
+                <a class="cardbtn" href="/user/{{post.author}}">User: {{post.user.username}}</a>
+            </div> --}}
+            <a href="login" id="LoginContent">Login to join the fun!</a>
+
+        </div>
+        {{/if}}
+
+    </section>
+
+
+</body>

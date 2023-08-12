@@ -1,12 +1,15 @@
+const path = require('path');
 const express = require('express');
-const sequelize = require('./config/connection');
-const session = require('express-session')
-const routes = require('./routes')
+const session = require('express-session');
+const exphbs = require('express-handlebars');
+const hbs = exphbs.create();
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 
+const routes = require('./routes');
+const sequelize = require('./config/connection');
 
-const path = require('path')
+
 const app = express();
 const PORT = process.env.PORT || 3001
 
@@ -21,50 +24,26 @@ const sess = {
 
     },
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     store: new SequelizeStore({
         db: sequelize,
-      }),
-  };
+    }),
+};
 
 
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session(sess))
-
+app.use(session(sess));
 app.use(routes);
+app.use(require('./routes/home-routes'))
 
 
-app.post( '/login', async (req, res) => {
-    const {email , password} = req.body
-    if(email && password)
-    {
-        req.session.loggedin = true
-        req.session.user = email
-        res.json(req.session)
 
-    }
-    else{
-        res.status(403).json("no good")
-    }
-
-})
-app.post( '/logout', async (req, res) => {
-    if(req.session.loggedin)
-    {
-        req.session.loggedin = false
-        res.json(req.session)
-
-    }
-    else{
-        res.status(403).json("no good")
-    }
-
-})
-
-sequelize.sync().then(()=> {
-    app.listen(PORT, ()=> {
+sequelize.sync().then(() => {
+    app.listen(PORT, () => {
         console.log(`http://localhost:${PORT}/`);
     })
 })
