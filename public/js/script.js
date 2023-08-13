@@ -14,13 +14,13 @@ const sendPost = async (event) => {
             method: 'POST',
             body: JSON.stringify({ title, content }),
             headers: { 'Content-Type': 'application/json' },
-        });        
-        
-    if (response.ok) {
-        document.location.replace('/');
-      } else {
-        alert('Missing information');
-      }
+        });
+
+        if (response.ok) {
+            document.location.replace('/');
+        } else {
+            alert('Missing information');
+        }
     }
 };
 
@@ -28,27 +28,62 @@ const sendPost = async (event) => {
 const deletePost = async (event) => {
     postSelected = event.target
     const userId = event.target.getAttribute("userId")
-    const postId = event.target.getAttribute("postId")    
+    const postId = event.target.getAttribute("postId")
 
 
     const response = await fetch('/api/post/', {
         method: 'DELETE',
-        body: JSON.stringify({postId,userId}),
+        body: JSON.stringify({ postId, userId }),
         headers: { 'Content-Type': 'application/json' },
-    });   
+    });
     response.ok ?
-    document.location.reload():
-    alert("Can't Delete other Users Post")
+        document.location.reload() :
+        alert("Can't Delete other Users Post")
+}
+
+function addCommentSection() {
+    const commentBtn = document.querySelector('#commentBtn')
+    const commentSection = document.querySelector('.commentSection')
+    commentSection.setAttribute('style', 'display: block;')
+    commentBtn.remove()
+
+}
+
+async function sendComment(){
+    const btnCommentSubmit = document.querySelector('.btnCommentSubmit')
+    const contentText = document.querySelector('.commentContent')
+
+    const orginalPost = Number(btnCommentSubmit.getAttribute('postid'))
+    const content = contentText.value
+
+    if (content !== '') {
+        const response = await fetch('/api/comment/', {
+            method: 'POST',
+            body: JSON.stringify({ orginalPost, content }),
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (response.ok) {
+            document.location.reload();
+        } else {
+            alert('Missing Comment Text');
+        }
+    }
+
+
 }
 
 
 
 
-if(deleteBtn){
+
+
+if (deleteBtn) {
     deleteBtn.addEventListener('click', deletePost)
 }
 
-if(postBtn){
+if (postBtn) {
     postBtn.addEventListener('click', sendPost)
 }
+
 

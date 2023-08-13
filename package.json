@@ -4,6 +4,7 @@
   "description": "blog style website use handlebars and sql",
   "main": "server.js",
   "scripts": {
+    "start": "node seeds/seed.js && node server.js",
     "devStart": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node seeds/seed.js"

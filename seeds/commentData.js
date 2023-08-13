@@ -7,9 +7,9 @@ const seedComment = () => Comment.bulkCreate([
         orginalPost: 2,
     },
     {
-        content: "more cool guy",
+        content: "AI is cool but scary",
         author: 2,
-        orginalPost: 1,
+        orginalPost: 5,
     },
 ]);
 

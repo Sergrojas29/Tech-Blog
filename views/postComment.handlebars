@@ -7,24 +7,33 @@
         {{#if hasComment}}
         <div class="homecard" id="card_menu">
             <div class="infoContian">
-                <div class="cardbtn" href="/post/">{{posts.post.title}}</div>
-                <div class="cardbtn" href="/user/{{posts.author}}">{{posts.user.username}}</div>
-                <button onclick="deletePost(event)" class="cardbtn" id="deleteBtn" userId="{{posts.author}}"
-                    postId="{{posts.id}}">Delete Post</button>
+                <div class="cardbtn" href="/post/">{{post.post.title}}</div>
+                <div class="cardbtn" href="/user/{{post.author}}">{{post.user.username}}</div>
+                <button onclick="addCommentSection()" class="cardbtn" id="commentBtn" userId="{{posts.author}}">Add
+                    Comment</button>
             </div>
-            <p id="Content">{{posts.post.content}}</p>
+            <p id="Content">{{post.post.content}}</p>
+        </div>
+        <div class="commentSection" style="display: none;">
+            <div class="homecard" id="card_menu">
+                <div class="infoContian">
+                    <div class="cardbtn" id="postTitle" placeholder="Enter Title" type="text">New Comment</div>
+                </div>
+                <input type="test" id="Content" class="commentContent" name="Content" placeholder="Enter Post">
+                <button class="btnCommentSubmit" postid="{{post.post.id}}" onclick="sendComment()">Submit
+                    Comment</button>
+            </div>
         </div>
 
-        {{#each posts as |post|}}
+        {{#each commets as |commet|}}
 
         <div class="homecard" id="card_menu">
             <div class="infoContian">
-                <div class="cardbtn">Comment</div>
-                <div class="cardbtn">{{posts.user.username}}</div>
-                <button onclick="deletePost(event)" class="cardbtn" id="deleteBtn" userId="{{posts.author}}"
-                    postId="{{posts.id}}">Delete Post</button>
+                <div class="cardbtn">Commentted by: {{commet.user.username}}</div>
+                {{!-- <button onclick="deletePost(event)" class="cardbtn" id="deleteBtn"
+                    userId="{{commet.posts.author}}" postId="{{commet.posts.id}}">Delete Post</button> --}}
             </div>
-            <p id="Content">{{posts.post.content}}</p>
+            <p id="Content">{{commet.content}}</p>
         </div>
         {{/each}}
 
@@ -34,11 +43,22 @@
             <div class="infoContian">
                 <div class="cardbtn" href="">{{posts.title}}</div>
                 <div class="cardbtn" href="/user/{{posts.author}}">{{posts.username}}</div>
-                <button onclick="deletePost(event)" class="cardbtn" id="deleteBtn" userId="{{posts.author}}"
-                    postId="{{posts.id}}">Delete Post</button>
+                <button onclick="addCommentSection()" class="cardbtn" id="commentBtn" userId="{{posts.author}}"
+                    postId="{{posts.id}}">Add Comment</button>
             </div>
             <p id="Content">{{posts.content}}</p>
 
+        </div>
+
+        <div class="commentSection" style="display: none;">
+            <div class="homecard" id="card_menu">
+                <div class="infoContian">
+                    <div class="cardbtn" id="postTitle" placeholder="Enter Title" type="text">New Comment</div>
+                </div>
+                <input type="test" id="Content" class="commentContent" name="Content" placeholder="Enter Post">
+                <button class="btnCommentSubmit" postid="{{posts.id}}" onclick="sendComment()">Submit
+                    Comment</button>
+            </div>
         </div>
 
         {{/if}}

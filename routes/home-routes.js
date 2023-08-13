@@ -25,16 +25,11 @@ router.get('/post', async (req, res) => {
 });
 
 router.get('/post/:id', async (req, res) => {
-	const checkForPost = await Comment.findAll({ where: {orginalPost: req.params.id }})
-	
-
-
-
-	console.log(checkForPost.length);
+	const checkForPost = await Comment.findAll({ where: { orginalPost: req.params.id } })
 	if (checkForPost.length > 0) {
 		const loggedIn = req.session.loggedIn
 		const hasComment = true
-		const postAll = await Comment.findAll({
+		const allComments = await Comment.findAll({
 			where: {
 				orginalPost: req.params.id
 			},
@@ -54,20 +49,18 @@ router.get('/post/:id', async (req, res) => {
 						'content'
 					]
 				}]
-			})
-			
-			const posts = postAll.map((e) => e.get({plain:true}))
-			console.log(posts);
-			res.render('postComment', { loggedIn, hasComment, posts })
-		} else {
+		})
+
+		const commets = allComments.map((e) => e.get({ plain: true }))
+		post = commets[0]
+		res.render('postComment', { loggedIn, hasComment, commets, post })
+	} else {
 		const postData = await Post.findByPk(req.params.id)
 		const loggedIn = req.session.loggedIn
-		const posts = postData.get({plain:true})
+		const posts = postData.get({ plain: true })
 		const hasComment = false
-		res.render('postComment', {loggedIn, hasComment, posts })
+		res.render('postComment', { loggedIn, hasComment, posts })
 	}
-
-
 });
 
 

@@ -123,6 +123,26 @@ label {
     color: #ffffff;
 }
 
+.btnCommentSubmit {
+    padding: 10px;
+    width: 90%;
+    height: 60px;
+    font-size: 18pt;
+    font-weight: 400;
+    border-radius: 15px;
+    margin-top: 10px;
+    margin: 10px auto;
+    border: none;
+    background: #238636;
+    color: #ffffff;
+}
+
+.btnCommentSubmit:hover{
+    background: #3cc257;
+    cursor: pointer;
+    
+}
+
 
 #catCard {
     margin: 25px;
@@ -427,35 +447,20 @@ label {
     color: black;
 }
 
-#deleteBtn{
+#deleteBtn,#commentBtn{
     padding: 10px 20px;
     border: none;
     background: #a9a9a9;
     border-radius: 10px;
 }
 
-#deleteBtn:hover {
+#deleteBtn:hover,
+#commentBtn:hover {
     color: white;
     background: #800d0d;
 }
 
 
-#card_menu,
-#card_cat,
-#card_login {
-    background-image: url(/assets/cat-coffee.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-#card_cat {
-    background-image: url(/assets/meetourcats.jpg)
-}
-
-#card_login {
-    background-image: url(/assets/Patorn.jpg);
-
-}
 
 
 

@@ -47,7 +47,11 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const newPost = await Comment.create(req.body)
+        const author = req.session.userId
+        console.log(req.session);
+        const {orginalPost, content} = req.body
+        const data = {content, author, orginalPost}
+        const newPost = await Comment.create(data)
         res.status(200).send(newPost)
 
     } catch (error) {
