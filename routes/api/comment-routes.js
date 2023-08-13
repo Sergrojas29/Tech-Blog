@@ -1,17 +1,11 @@
 const router = require('express').Router();
 
-const { Post, User } = require('../../models')
+const { Comment, Post, User } = require('../../models')
 
 
 router.get('/', async (req, res) => {
     try {
-        const data = await Post.findAll(
-            {
-                include: [
-                    User
-                ]
-            }
-        )
+        const data = await Comment.findAll({ include: [User, Post] })
         res.status(200).json(data)
 
     } catch (err) {
@@ -23,10 +17,25 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const data = await Post.findOne({
+        const data = await Comment.findOne({
             where: {
                 id: req.params.id
-            }
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: [
+                        'id',
+                        'username'
+                    ]
+                },
+                {
+                    model: Post,
+                    attributes: [
+                        'id',
+                        'title'
+                    ]
+                }]
         })
         res.status(200).json(data)
 
@@ -38,13 +47,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        author = req.session.userId
-        data = {
-            ...req.body,
-            author
-        }
-        console.log(req.body);
-        const newPost = await Post.create(data)
+        const newPost = await Comment.create(req.body)
         res.status(200).send(newPost)
 
     } catch (error) {
@@ -53,26 +56,14 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.put('/:id', async (req, res) => {
-    try {
-        const data = await Post.update(req.body, {
-            where: {
-                id: req.params.id
-            }
-        })
 
-        res.status(200).json(data)
-    } catch (error) {
-        res.status(400).json(error)
-    }
-})
 
 router.delete('/', async (req, res) => {
     try {
         userId = req.session.userId
 
         if (userId === Number(req.body.userId)) {
-            const data = await Post.destroy(
+            const data = await Comment.destroy(
                 {
                     where: {
                         id: req.body.postId

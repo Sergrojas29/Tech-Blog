@@ -1,15 +1,15 @@
 const router = require('express').Router();
-const { User, Post } = require('../models');
+const { User, Post, Comment } = require('../models');
 
 
 
 router.get('/', async (req, res) => {
 	try {
 		const loggedIn = req.session.loggedIn
-		const allPosts = await Post.findAll({include:[User]})
+		const allPosts = await Post.findAll({ include: [User] })
 		const posts = allPosts.map((e) => e.get({ plain: true }))
-		res.render('homepage', {posts, loggedIn} );
-		
+		res.render('homepage', { posts, loggedIn });
+
 	} catch (error) {
 		res.status(404).send('<h1>Error</h1>')
 	}
@@ -17,24 +17,74 @@ router.get('/', async (req, res) => {
 
 router.get('/post', async (req, res) => {
 	const loggedIn = req.session.loggedIn
-	const username = req.session.username
+	const userId = req.session.userId
 
-	loggedIn ? 
-	res.render('createPost', {username,loggedIn} ):
-	res.render('login',{loggedIn})
+	loggedIn ?
+		res.render('createPost', { userId, loggedIn }) :
+		res.render('login', { loggedIn })
+});
+
+router.get('/post/:id', async (req, res) => {
+	const checkForPost = await Comment.findAll({ where: {orginalPost: req.params.id }})
+	
+
+
+
+	console.log(checkForPost.length);
+	if (checkForPost.length > 0) {
+		const loggedIn = req.session.loggedIn
+		const hasComment = true
+		const postAll = await Comment.findAll({
+			where: {
+				orginalPost: req.params.id
+			},
+			include: [
+				{
+					model: User,
+					attributes: [
+						'id',
+						'username'
+					]
+				},
+				{
+					model: Post,
+					attributes: [
+						'id',
+						'title',
+						'content'
+					]
+				}]
+			})
+			
+			const posts = postAll.map((e) => e.get({plain:true}))
+			console.log(posts);
+			res.render('postComment', { loggedIn, hasComment, posts })
+		} else {
+		const postData = await Post.findByPk(req.params.id)
+		const loggedIn = req.session.loggedIn
+		const posts = postData.get({plain:true})
+		const hasComment = false
+		res.render('postComment', {loggedIn, hasComment, posts })
+	}
+
+
 });
 
 
 
 router.get('/login', async (req, res) => {
 	const loggedIn = req.session.loggedIn
-	res.render('login', {loggedIn});
+	res.render('login', { loggedIn });
 });
 
 router.get('/logout', async (req, res) => {
-	req.session.loggedIn = false
-	const loggedIn = req.session.loggedIn
-	res.render('homepage', {loggedIn})
+	try {
+		req.session.destroy();
+
+		res.render('homepage')
+	} catch (error) {
+		console.log(error);
+	}
 }
 )
 

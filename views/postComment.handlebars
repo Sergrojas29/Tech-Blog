@@ -1,0 +1,50 @@
+<body>
+    <section id="homeIntroContain">
+        <div id="titleContain">
+            <h1 id="hometitle">The Tech Blog</h1>
+    </section>
+    <section class="HomeCardContainPost">
+        {{#if hasComment}}
+        <div class="homecard" id="card_menu">
+            <div class="infoContian">
+                <div class="cardbtn" href="/post/">{{posts.post.title}}</div>
+                <div class="cardbtn" href="/user/{{posts.author}}">{{posts.user.username}}</div>
+                <button onclick="deletePost(event)" class="cardbtn" id="deleteBtn" userId="{{posts.author}}"
+                    postId="{{posts.id}}">Delete Post</button>
+            </div>
+            <p id="Content">{{posts.post.content}}</p>
+        </div>
+
+        {{#each posts as |post|}}
+
+        <div class="homecard" id="card_menu">
+            <div class="infoContian">
+                <div class="cardbtn">Comment</div>
+                <div class="cardbtn">{{posts.user.username}}</div>
+                <button onclick="deletePost(event)" class="cardbtn" id="deleteBtn" userId="{{posts.author}}"
+                    postId="{{posts.id}}">Delete Post</button>
+            </div>
+            <p id="Content">{{posts.post.content}}</p>
+        </div>
+        {{/each}}
+
+
+        {{else}}
+        <div class="homecard" id="card_menu">
+            <div class="infoContian">
+                <div class="cardbtn" href="">{{posts.title}}</div>
+                <div class="cardbtn" href="/user/{{posts.author}}">{{posts.username}}</div>
+                <button onclick="deletePost(event)" class="cardbtn" id="deleteBtn" userId="{{posts.author}}"
+                    postId="{{posts.id}}">Delete Post</button>
+            </div>
+            <p id="Content">{{posts.content}}</p>
+
+        </div>
+
+        {{/if}}
+
+
+    </section>
+
+
+</body>

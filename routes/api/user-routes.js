@@ -9,10 +9,12 @@ const { User, Post } = require('../../models')
 
 router.post('/', async (req, res) => {
     try {
-        if (req.body.first_name && req.body.last_name && req.body.password && req.body.email) {
+        if (req.body.username && req.body.password && req.body.email) {
             const dbUserData = await User.create(req.body);
-            console.log(dbUserData)
+            const newUser = dbUserData.get({plain:true})
             req.session.loggedIn = true;
+            req.session.username = newUser.username;
+            req.session.userId= newUser.id
             res.status(200).redirect('/')
         } else {
 
@@ -34,23 +36,20 @@ router.post('/login', async (req, res) => {
                 email: req.body.email,
             },
         });
-        const user = dbUserData.get({plain:true})
-
-        const validPassword = dbUserData.checkPassword(req.body.password);
-
+        
+        const validPassword = await dbUserData.checkPassword(req.body.password);
+        
         if (!validPassword || !dbUserData) {
             // If password is invalid, respond with an error
-            res.status(400).json({ message: 'Incorrect email or password. Please try again!' });
+            res.status(400).send('<h1> Incorrect email or password. Please try again! </h1>');
             return
         } else {
-
+            
+            const user = dbUserData.get({plain:true})
             // At this point, both email and password are valid
             req.session.loggedIn = true;
             req.session.username = user.username;
-            req.session.id= user.id
-            console.log(req.session);
-            console.log(user);
-
+            req.session.userId= user.id
             return res.status(200).redirect('/');
         }
 

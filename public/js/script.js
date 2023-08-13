@@ -1,3 +1,8 @@
+
+const postBtn = document.querySelector('.btnPostSubmit')
+const deleteBtn = document.querySelector('#deleteBtn')
+
+
 const sendPost = async (event) => {
 
     event.preventDefault();
@@ -19,7 +24,29 @@ const sendPost = async (event) => {
     }
 };
 
-const postBtn = document.querySelector('.btnPostSubmit')
+
+const deletePost = async (event) => {
+    postSelected = event.target
+    const userId = event.target.getAttribute("userId")
+    const postId = event.target.getAttribute("postId")    
+
+
+    const response = await fetch('/api/post/', {
+        method: 'DELETE',
+        body: JSON.stringify({postId,userId}),
+        headers: { 'Content-Type': 'application/json' },
+    });   
+    response.ok ?
+    document.location.reload():
+    alert("Can't Delete other Users Post")
+}
+
+
+
+
+if(deleteBtn){
+    deleteBtn.addEventListener('click', deletePost)
+}
 
 if(postBtn){
     postBtn.addEventListener('click', sendPost)
