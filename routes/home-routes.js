@@ -25,8 +25,9 @@ router.get('/post', async (req, res) => {
 });
 
 router.get('/post/:id', async (req, res) => {
-	const checkForPost = await Comment.findAll({ where: { orginalPost: req.params.id } })
-	if (checkForPost.length > 0) {
+	try {
+		const checkForPost = await Comment.findAll({ where: { orginalPost: req.params.id } })
+		if (checkForPost.length > 0) {
 		const loggedIn = req.session.loggedIn
 		const hasComment = true
 		const allComments = await Comment.findAll({
@@ -49,8 +50,8 @@ router.get('/post/:id', async (req, res) => {
 						'content'
 					]
 				}]
-		})
-
+			})
+			
 		const commets = allComments.map((e) => e.get({ plain: true }))
 		post = commets[0]
 		res.render('postComment', { loggedIn, hasComment, commets, post })
@@ -60,6 +61,10 @@ router.get('/post/:id', async (req, res) => {
 		const posts = postData.get({ plain: true })
 		const hasComment = false
 		res.render('postComment', { loggedIn, hasComment, posts })
+	}
+	
+	} catch (error) {
+		res.send("<a href='../'>Wrong Route! Return Home</a>")
 	}
 });
 
@@ -80,6 +85,11 @@ router.get('/logout', async (req, res) => {
 	}
 }
 )
+
+
+router.use((req, res) => {
+    res.send("<a href='/'>Wrong Route! Return Home</a>")
+  });
 
 
 module.exports = router;

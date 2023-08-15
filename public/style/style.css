@@ -3,7 +3,10 @@
     padding: 0;
     box-sizing: border-box;
     /* font-family: founders-heading, sans-serif; */
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    font-family: 'Lato', sans-serif;
+    font-family: 'Outfit', sans-serif;
+    /* font-family: 'Ruwudu', serif; */
 }
 
 :root {
@@ -137,10 +140,10 @@ label {
     color: #ffffff;
 }
 
-.btnCommentSubmit:hover{
+.btnCommentSubmit:hover {
     background: #3cc257;
     cursor: pointer;
-    
+
 }
 
 
@@ -273,12 +276,14 @@ label {
 
         }
 
-        
+
     }
 
 }
 
-#size, #age, #affection {
+#size,
+#age,
+#affection {
     color: black;
     font-weight: 800;
     display: flex;
@@ -291,7 +296,7 @@ label {
     /* border-radius: 100%; */
 }
 
-#updateAvailabilityForm{
+#updateAvailabilityForm {
     display: flex;
     height: fit-content;
     /* width: 45px; */
@@ -368,6 +373,7 @@ label {
     padding-bottom: 60px;
     /* width: 100%; */
 }
+
 .HomeCardContainPost {
 
     display: flex;
@@ -408,7 +414,7 @@ label {
     box-shadow: 0 0 15px grey;
     font-size: 30pt;
     text-align: center;
-    
+
 }
 
 #Content {
@@ -421,22 +427,24 @@ label {
     margin: 0 auto;
     box-shadow: 0 0 15px grey;
     font-size: 20pt;
-    
+
 }
-#Content::placeholder{
+
+#Content::placeholder {
     color: rgb(190, 190, 190);
 }
-.infoContian{
+
+.infoContian {
     display: flex;
     justify-content: space-between;
     align-self: center;
     align-content: center;
     align-items: center;
-    font-size:  30px;
+    font-size: 30px;
     height: 25%;
     width: 90%;
     /* border: solid 1pt red ; */
-    
+
 }
 
 .cardbtn {
@@ -447,7 +455,15 @@ label {
     color: black;
 }
 
-#deleteBtn,#commentBtn{
+
+/* ! Link for title */
+#titleLink:hover{
+    background-color: var(--Accent);
+    color: white;
+}
+
+#deleteBtn,
+#commentBtn {
     padding: 10px 20px;
     border: none;
     background: #a9a9a9;
@@ -460,6 +476,9 @@ label {
     background: #800d0d;
 }
 
+#deleteBtn{
+    font-size: 14pt;
+}
 
 
 

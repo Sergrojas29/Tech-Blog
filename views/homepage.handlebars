@@ -9,7 +9,7 @@
         {{#each posts as |post|}}
         <div class="homecard" id="card_menu">
             <div class="infoContian">
-                <a class="cardbtn" href="/post/{{post.id}}">{{post.title}}</a>
+                <a class="cardbtn" href="/post/{{post.id}}" id="titleLink">{{post.title}}</a>
                 <div class="cardbtn" href="/user/{{post.author}}">{{post.user.username}}</div>
                 <button onclick="deletePost(event)" class="cardbtn" id="deleteBtn" userId="{{post.author}}" postId="{{post.id}}" >Delete Post</button>
             </div>
